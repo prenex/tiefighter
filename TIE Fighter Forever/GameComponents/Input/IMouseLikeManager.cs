@@ -32,7 +32,6 @@ namespace TIE_Fighter_Forever.Input
         /// </summary>
         int getZ();
         /// <summary>
-        /// <summary>
         /// Kurzor X koordinátáját adja meg [-1.0f..1.0f] intervallumra normálva
         /// </summary>
         float getNormalizedX();

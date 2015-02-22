@@ -247,7 +247,11 @@ namespace TIE_Fighter_Forever.Screens.Battle
                 if (keyLikeMan.exitPressed())
                     menuOn = true;
 
-                rotationZ = mouseLikeMan.getNormalizedX();
+                rotationZ = mouseLikeMan.getNormalizedX() * 1.3f;
+                if (Math.Abs(rotationZ) > 1.0f)
+                {
+                    rotationZ *= Math.Abs(rotationZ);
+                }
                 rotationX = mouseLikeMan.getNormalizedY();
                 speed = playerShip.maxSpeed * -mouseLikeMan.getNormalizedZ();
                 //speed = 1.25f;

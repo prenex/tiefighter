@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="TIE Fighter Forever">
+</Property><Property Name="Solution File" Value="E:\TIE\TIE Fighter Forever\TIE Fighter Forever.sln">
+</Property><Property Name="User Options File" Value="E:\TIE\TIE Fighter Forever\TIE Fighter Forever.suo">
+</Property><Property Name="Date" Value="2010. december 21.">
+</Property><Property Name="Time" Value="14:23">
+</Property><Property Name="Solution" Value="TIE Fighter Forever">
+</Property><Property Name="Solution File" Value="E:\TIE\TIE Fighter Forever\TIE Fighter Forever.sln">
+</Property><Property Name="Date" Value="2010. december 21.">
+</Property><Property Name="Time" Value="14:23:59">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="TIE Fighter Forever.sln" Description="File successfully backed up as E:\TIE\TIE Fighter Forever\Backup\TIE Fighter Forever.sln">
+</Event><Event ErrorLevel="0" Project="" Source="TIE Fighter Forever.suo" Description="File successfully backed up as E:\TIE\TIE Fighter Forever\Backup\TIE Fighter Forever.suo">
+</Event><Event ErrorLevel="0" Project="TIE Fighter Forever" Source="TIE Fighter Forever\TIE Fighter Forever.csproj" Description="Upgraded XNA Game Studio project to XNA Framework 4.0.">
+</Event><Event ErrorLevel="0" Project="TIE Fighter Forever" Source="TIE Fighter Forever\TIE Fighter Forever.csproj" Description="Project file successfully backed up as E:\TIE\TIE Fighter Forever\Backup\TIE Fighter Forever\TIE Fighter Forever.csproj">
+</Event><Event ErrorLevel="0" Project="TIE Fighter Forever" Source="TIE Fighter Forever\TIE Fighter Forever.csproj.user" Description="Project user file successfully backed up as E:\TIE\TIE Fighter Forever\Backup\TIE Fighter Forever\TIE Fighter Forever.csproj.user">
+</Event><Event ErrorLevel="0" Project="TIE Fighter Forever" Source="TIE Fighter Forever\Battle\BattleScreen.cs" Description="File successfully backed up as E:\TIE\TIE Fighter Forever\Backup\TIE Fighter Forever\Battle\BattleScreen.cs">
+</Event><Event ErrorLevel="0" Project="TIE Fighter Forever" Source="TIE Fighter Forever\Input\IKeyboardLikeManager.cs" Description="File successfully backed up as E:\TIE\TIE Fighter Forever\Backup\TIE Fighter Forever\Input\IKeyboardLikeManager.cs">
+</Event><Event ErrorLevel="0" Project="TIE Fighter Forever" Source="TIE Fighter Forever\Input\KeyboardManager.cs" Description="File successfully backed up as E:\TIE\TIE Fighter Forever\Backup\TIE Fighter Forever\Input\KeyboardManager.cs">
+</Event><Event ErrorLevel="0" Project="TIE Fighter Forever" Source="TIE Fighter Forever\Battle\LoadingScreen.cs" Description="File successfully backed up as E:\TIE\TIE Fighter Forever\Backup\TIE Fighter Forever\Battle\LoadingScreen.cs">
+</Event><Event ErrorLevel="0" Project="TIE Fighter Forever" Source="TIE Fighter Forever\Menu\TextMenus.cs" Description="File successfully backed up as E:\TIE\TIE Fighter Forever\Backup\TIE Fighter Forever\Menu\TextMenus.cs">
+</Event><Event ErrorLevel="0" Project="TIE Fighter Forever" Source="TIE Fighter Forever\Menu\MainMenuScreen.cs" Description="File successfully backed up as E:\TIE\TIE Fighter Forever\Backup\TIE Fighter Forever\Menu\MainMenuScreen.cs">
+</Event><Event ErrorLevel="0" Project="TIE Fighter Forever" Source="TIE Fighter Forever\Properties\AssemblyInfo.cs" Description="File successfully backed up as E:\TIE\TIE Fighter Forever\Backup\TIE Fighter Forever\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="TIE Fighter Forever" Source="TIE Fighter Forever\Program.cs" Description="File successfully backed up as E:\TIE\TIE Fighter Forever\Backup\TIE Fighter Forever\Program.cs">
+</Event><Event ErrorLevel="0" Project="TIE Fighter Forever" Source="TIE Fighter Forever\TIEGame.cs" Description="File successfully backed up as E:\TIE\TIE Fighter Forever\Backup\TIE Fighter Forever\TIEGame.cs">
+</Event><Event ErrorLevel="0" Project="TIE Fighter Forever" Source="TIE Fighter Forever\Game.ico" Description="File successfully backed up as E:\TIE\TIE Fighter Forever\Backup\TIE Fighter Forever\Game.ico">
+</Event><Event ErrorLevel="0" Project="TIE Fighter Forever" Source="TIE Fighter Forever\GameThumbnail.png" Description="File successfully backed up as E:\TIE\TIE Fighter Forever\Backup\TIE Fighter Forever\GameThumbnail.png">
+</Event><Event ErrorLevel="0" Project="TIE Fighter Forever" Source="TIE Fighter Forever\TIE Fighter Forever.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="TIE Fighter Forever" Source="TIE Fighter Forever\TIE Fighter Forever.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="TIE Fighter Forever.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="TIE Fighter Forever.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="TIE Fighter Forever" Source="TIE Fighter Forever\TIE Fighter Forever.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="TIE Fighter Forever" Source="TIE Fighter Forever\TIE Fighter Forever.csproj" Description="Upgraded XNA Framework references to XNA Framework 4.0.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="LoadFont.spritefont" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="MainMenu.png" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="MenuFont1.spritefont" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content.contentproj" Source="Content.contentproj" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="TIE Fighter ForeverContent" Source="TIE Fighter Forever\Content\TIE Fighter ForeverContent.contentproj" Description="Upgraded XNA Game Studio nested content projects to XNA Framework 4.0 and promoted to sibling project.">
+</Event></UpgradeLog>

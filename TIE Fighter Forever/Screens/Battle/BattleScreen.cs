@@ -44,7 +44,7 @@ namespace TIE_Fighter_Forever.Screens.Battle
         Matrix projection;
         Matrix view;
         Texture2D hud;
-        Texture2D shield;
+        Texture2D bar;
         #endregion
         #region BattleField
         BattleFieldComponent battlefield;
@@ -54,7 +54,7 @@ namespace TIE_Fighter_Forever.Screens.Battle
         Light light;
         #endregion
         #region Camera
-        PlayerShip camera;
+        PlayerShip playerShip;
         #endregion
         #region Camera_control
         float speed;
@@ -136,14 +136,14 @@ namespace TIE_Fighter_Forever.Screens.Battle
             ps.projection = projection;
 
             // Kamera objektum init
-            camera = new PlayerShip(new Vector3(0, 10, -250.0f), 0, 0, 0, 7.5f);
+            playerShip = new PlayerShip(new Vector3(0, 10, -250.0f), 0, 0, 0, 7.5f);
 
             const int maxSmallShipNum = 30;
             const int maxBigShipNum = 7;
             const int maxLaserNum = 65;
 
             battlefield = new BattleFieldComponent(game, maxBigShipNum, maxSmallShipNum, maxLaserNum, ps);
-            battlefield.addPlayer(camera);
+            battlefield.addPlayer(playerShip);
             battlefield.projection = projection;
 
             strategist = new BruteforceStrategist(battlefield, maxSmallShipNum);
@@ -156,7 +156,7 @@ namespace TIE_Fighter_Forever.Screens.Battle
                 sX = (float)(rand.NextDouble() - 0.5) * 2000;
                 sY = (float)(rand.NextDouble() - 0.5) * 2000;
                 sZ = (float)(rand.NextDouble() - 0.5) * 2000;
-                spawner.spawnSmallShip(new TieIn(game, new Vector3(sX, sY, sZ), Quaternion.CreateFromYawPitchRoll(0, (float)Math.PI / 2.0f, 0)), camera);
+                spawner.spawnSmallShip(new TieIn(game, new Vector3(sX, sY, sZ), Quaternion.CreateFromYawPitchRoll(0, (float)Math.PI / 2.0f, 0)), playerShip);
             }
 
             List<BoundingBox> bbs = new List<BoundingBox>();
@@ -196,7 +196,7 @@ namespace TIE_Fighter_Forever.Screens.Battle
             mainMenu.addMenuItem(new MenuItem("Exit battle"));
 
             hud = content.Load<Texture2D>("BattleContent\\hud");
-            shield = content.Load<Texture2D>("BattleContent\\shield");
+            bar = content.Load<Texture2D>("BattleContent\\bar");
         }
 
         protected override void UnloadContent()
@@ -217,7 +217,7 @@ namespace TIE_Fighter_Forever.Screens.Battle
                         sX = (float)(rand.NextDouble() - 0.5) * 2000;
                         sY = (float)(rand.NextDouble() - 0.5) * 2000;
                         sZ = (float)(rand.NextDouble() - 0.5) * 2000;
-                        spawner.spawnSmallShip(new TieIn(game, new Vector3(sX, sY, sZ), Quaternion.CreateFromYawPitchRoll(0, (float)Math.PI / 2.0f, 0)), camera);
+                        spawner.spawnSmallShip(new TieIn(game, new Vector3(sX, sY, sZ), Quaternion.CreateFromYawPitchRoll(0, (float)Math.PI / 2.0f, 0)), playerShip);
                     }
                 }
 
@@ -225,10 +225,10 @@ namespace TIE_Fighter_Forever.Screens.Battle
             HandleInput(gameTime);
             if (!menuOn)
             {
-                camera.rotate(-rotationX, 0, rotationZ);
-                camera.goForward(speed);
+                playerShip.rotate(-rotationX, 0, rotationZ);
+                playerShip.goForward(speed);
 
-                if (camera.life < 0)
+                if (playerShip.life < 0)
                     exitScreen();
 
                 strategist.updateState();
@@ -249,14 +249,14 @@ namespace TIE_Fighter_Forever.Screens.Battle
 
                 rotationZ = mouseLikeMan.getNormalizedX();
                 rotationX = mouseLikeMan.getNormalizedY();
-                speed = 2.0f * -mouseLikeMan.getNormalizedZ();
+                speed = playerShip.maxSpeed * -mouseLikeMan.getNormalizedZ();
                 //speed = 1.25f;
 
                 if (mouseLikeMan.leftButton())
                 {
                     if (gt.TotalGameTime.TotalMilliseconds > lastFired + 1000)
                     {
-                        spawner.spawnQuadLaser(camera);
+                        spawner.spawnQuadLaser(playerShip);
                         lastFired = gt.TotalGameTime.TotalMilliseconds;
                     }
                 }
@@ -275,7 +275,7 @@ namespace TIE_Fighter_Forever.Screens.Battle
             graphics.GraphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
 
             // 3D rajzolások innentől
-            view = camera.contructViewMatrix();
+            view = playerShip.contructViewMatrix();
 
             GraphicsDevice.BlendState = BlendState.Opaque;
             graphics.GraphicsDevice.DepthStencilState = DepthStencilState.None;
@@ -290,8 +290,8 @@ namespace TIE_Fighter_Forever.Screens.Battle
             graphics.GraphicsDevice.DepthStencilState = DepthStencilState.DepthRead;
             graphics.GraphicsDevice.BlendState = realAdditiveBlend;
             ps.view = view;
-            ps.cameraPos = camera.position;
-            ps.cameraUp = camera.getUpVector();
+            ps.cameraPos = playerShip.position;
+            ps.cameraUp = playerShip.getUpVector();
             ps.Draw(gameTime);
 
             // Glow effect
@@ -314,11 +314,23 @@ namespace TIE_Fighter_Forever.Screens.Battle
             // Various bars
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive);
             // Health-bar
-            float relHp = (float)camera.life / (float)PlayerShip.maxHealth;
-            spriteBatch.Draw(shield, new Rectangle(GraphicsDevice.Viewport.X, GraphicsDevice.Viewport.Y, (int)((GraphicsDevice.Viewport.Width / 4) * relHp), GraphicsDevice.Viewport.Height / 20), new Color(255, 255, 255));
+            float relHp = (float)playerShip.life / (float)PlayerShip.maxHealth;
+            spriteBatch.Draw(bar, new Rectangle(GraphicsDevice.Viewport.X, GraphicsDevice.Viewport.Y, (int)((GraphicsDevice.Viewport.Width / 4) * relHp), GraphicsDevice.Viewport.Height / 20), new Color(255, 255, 255));
             // Speed-bar
+            // relSpeed is in [-1,1]
+            float relSpeed = (float)speed / playerShip.maxSpeed;
+            int speedBarLeft = GraphicsDevice.Viewport.X + GraphicsDevice.Viewport.Width / 8;
+            int speedBarWidth = (int)((GraphicsDevice.Viewport.Width / 8) * relSpeed);
+            if (speedBarWidth < 0)
+            {
+                speedBarWidth *= -1;
+                speedBarLeft = speedBarLeft - speedBarWidth;
+            }
+            spriteBatch.Draw(bar, new Rectangle(speedBarLeft, GraphicsDevice.Viewport.Y + GraphicsDevice.Viewport.Height / 19, speedBarWidth, GraphicsDevice.Viewport.Height / 20), new Color(255, 50, 25));
 
             spriteBatch.End();
+
+
             // Crosschair
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive);
             spriteBatch.Draw(hud, new Rectangle(GraphicsDevice.Viewport.X, GraphicsDevice.Viewport.Y, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), new Color(255, 255, 255));

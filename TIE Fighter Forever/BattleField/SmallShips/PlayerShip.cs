@@ -8,7 +8,12 @@ namespace TIE_Fighter_Forever.BattleField.SmallShips
 {
     public class PlayerShip : SmallShip
     {
+        // Current default maximum heath,, TODO: make this changable!
         public const int maxHealth = 120;
+
+        // Current default maximum speed, TODO: make this changable!
+        public float maxSpeed = 2.0f;
+
         /// <summary>
         /// Létrehozza a játékos belőnézetes kameráját a megadott kezdőpozícióval és elforgatással
         /// </summary>

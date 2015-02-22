@@ -331,8 +331,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BattleContent\shield.JPG">
-      <Name>shield</Name>
+    <Compile Include="BattleContent\bar.jpg">
+      <Name>bar</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

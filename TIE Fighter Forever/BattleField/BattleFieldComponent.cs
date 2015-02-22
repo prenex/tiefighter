@@ -356,5 +356,10 @@ namespace TIE_Fighter_Forever.BattleField
                 }
             }
         }
+
+        internal PlayerShip getPlayerShip()
+        {
+            return playerCamera;
+        }
     }
 }

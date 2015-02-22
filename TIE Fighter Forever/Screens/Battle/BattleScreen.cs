@@ -249,7 +249,7 @@ namespace TIE_Fighter_Forever.Screens.Battle
 
                 rotationZ = mouseLikeMan.getNormalizedX();
                 rotationX = mouseLikeMan.getNormalizedY();
-                speed = 0.0005f * -mouseLikeMan.getZ();
+                speed = 2.0f * -mouseLikeMan.getNormalizedZ();
                 //speed = 1.25f;
 
                 if (mouseLikeMan.leftButton())
@@ -267,7 +267,9 @@ namespace TIE_Fighter_Forever.Screens.Battle
         {
             // Jelezzük a laserglow komponensünknek, hogy rajzolás kezdődik és
             if (game.settings.laserGlow)
+            {
                 glower.PrepareDraw();
+            }
 
             // Backface Culling bekapcsolása:
             graphics.GraphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
@@ -309,12 +311,15 @@ namespace TIE_Fighter_Forever.Screens.Battle
         /// </summary>
         void drawHUD()
         {
-            // Életerő
+            // Various bars
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive);
+            // Health-bar
             float relHp = (float)camera.life / (float)PlayerShip.maxHealth;
             spriteBatch.Draw(shield, new Rectangle(GraphicsDevice.Viewport.X, GraphicsDevice.Viewport.Y, (int)((GraphicsDevice.Viewport.Width / 4) * relHp), GraphicsDevice.Viewport.Height / 20), new Color(255, 255, 255));
+            // Speed-bar
+
             spriteBatch.End();
-            // Szálkereszt
+            // Crosschair
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive);
             spriteBatch.Draw(hud, new Rectangle(GraphicsDevice.Viewport.X, GraphicsDevice.Viewport.Y, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), new Color(255, 255, 255));
             spriteBatch.End();

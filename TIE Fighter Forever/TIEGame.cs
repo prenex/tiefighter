@@ -50,7 +50,6 @@ namespace TIE_Fighter_Forever
         /// </summary>
         protected override void Initialize()
         {
-            this.Com
             // Backface Culling:
             graphics.GraphicsDevice.RasterizerState = RasterizerState.CullNone; // .CullCounterClockwise;
 

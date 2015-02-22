@@ -8,6 +8,11 @@ namespace TIE_Fighter_Forever.Input
     interface IMouseLikeManager
     {
         /// <summary>
+        ///  Should be called when the manager gets initialized
+        /// </summary>
+        void reset();
+
+        /// <summary>
         /// Képernyő szélességét állítja be
         /// </summary>
         void setScreenWidth(int width);
@@ -35,6 +40,10 @@ namespace TIE_Fighter_Forever.Input
         /// Kurzor Y koordinátáját adja meg [-1.0f..1.0f] intervallumra normálva
         /// </summary>
         float getNormalizedY();
+        /// <summary>
+        /// Kurzor Z koordinátáját adja meg [-1.0f..1.0f] intervallumra normálva
+        /// </summary>
+        float getNormalizedZ();
         /// Igaz, ha a bal gomb ÉPPEN le van nyomva
         /// </summary>
         bool leftButton();

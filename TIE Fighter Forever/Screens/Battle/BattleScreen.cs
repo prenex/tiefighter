@@ -249,8 +249,8 @@ namespace TIE_Fighter_Forever.Screens.Battle
 
                 rotationZ = mouseLikeMan.getNormalizedX();
                 rotationX = mouseLikeMan.getNormalizedY();
-                //speed = 0.0005f * -mouseLikeMan.getZ();
-                speed = 1.25f;
+                speed = 0.0005f * -mouseLikeMan.getZ();
+                //speed = 1.25f;
 
                 if (mouseLikeMan.leftButton())
                 {

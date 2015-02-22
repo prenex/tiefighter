@@ -1,19 +1,20 @@
-# tiefighter
+# TIE Fighter Forever
 An open source XNA 4.0 Game called TIE Fighter Forever, inspired by the original TIE Fighter game.
 
 Please read the LICENCE file, before reading this so that you do not stole any ideas from me :-)
 
 I've decided to release this work of mine to the public as it seems I rarery touch it now but people might get interested... Historical note: I'm only doing this now as a girl friend of mine asked me to do some I-never-did-it little changes to the code so that the demo game becomes more enjoyable, but I got the idea of "oh... why not make this open to public?" so read on ;-)
 
-GENARALLY:
-------------------
+# GENARALLY:
+------------
 This is a game written in C# using the XNA 4.0 framework for my BSc thesis theme. I had big plans with this game, like adding a big tactical map somewhat resembling a part of the "real" star wars universe (see the Essential Atlas maps for example) where you can build your fleet of capital and smaller ships and make tactical moves in a wing commander armada-like fashion.
 
 The battles would be after that automatically generated: The ships and they position/orientation, the old TIE-Fighter-like primary and secondary objectives, and even issued commands towards you and othere ships by the strategist AI that you should go to that point in space shooting down all missles in your cubic space you are in (effectively shielding a capital ship against torpedoes) etc.
 
 So the main idea was that in start of a battle scene, the objectives would be generated, but there are also these changing little quests for which you will see a yellow arrow about current targets if you accept an arising "quest" (in the above case you will see a yellow arrow towards the cubic space around the ship to defend, if you comes there, automatically you get targets for incoming torpedoes).
 
-Also I had a storyline:
+# Also I had a storyline:
+-------------------------
 - The game starts after the second death star gets destroyed (with Palpatine too) and thus having a great confusion in the Empire.
 - Your main character will be "Priest". You should know... that is the cloacked figure in the old TIE Fighter game that always assigned you secondary objectives for getting into the inner circle of the emperor. It would turn out, he is a man who descended from the "prophets of the dark side" order (they are not Siths) and never really liked the emperor.
 -After the chaos and collapse, he finds a system that is hard to navigate in and basically there are only one well-known navigational trade route into the sector and thus it is a place that is pretty much easy to control if you control the navigation point of getting into it. I was thinking about the "centrality" area with junkfort station as the entry point and having (the already lifeless) old dark-side planet of Tund as the main lair for Priest (he would build an orbiting station there). Also the system will have some small sienar factories you want to aquire and some small planets.
@@ -33,7 +34,8 @@ Different starships would not only get different weapons like in other games, bu
 - Also I have the idea that the player could control also ships that are neither capital ships, nor fighters. Shuttles, excorts shuttles and transports (maybe even corellian or assault transports! :)) have been planned to also have the freespace-like control - just in a delayed and slow-turning way... - and the turbo-lasers that your crew members operate will constantly fire for the nearby enemies. These ships are like slow big tanks on todays battlefields and can store many torpedoes, a landing party or such, however because of the lumbering small move they do, they will be easy to take out by fighters, as usual and also fighter-bombers can be better in some situations.
 
 
-FROM THE ABOVE THINGS, NEARLY NOTHING IS DONE, HOWEVER:
+# What is already completed when I open this to public:
+-------------------------------------------------------
 - I had the idea of beautifully glowing laserfire. We do have it!
 - We have normal mapping, environment mapping, particle system for explosions....
 - We have a nicely done collision engine: There are collision classes like big ships, small ships and bullets. Small ships collide with small ships with fast collisions by thinking about the ship as a sphere, small ships collide with big ones by having a pre-compiled octree data structure and per-triangle collision (it is pretty fast as it only computes the fighter's collision against the triangles of the big ship in octree nodes the fighter is in - this even works if the big ship moves or changes orientation as it is all done translated to that coordinate system.
@@ -48,6 +50,7 @@ FROM THE ABOVE THINGS, NEARLY NOTHING IS DONE, HOWEVER:
 - There are interfaces for AI, menus and stuff.
 - Also because this was a thesis work, the code has documentation comments and also there is many technical details in the (Hungarian) thesis document of mine. I will put it into the repository however I think only few people could read Hungarian (anyways it's a pretty nice language really mystic and loreful, so you could check it out). Maybe once I will translate at least the table of contents and will answer to emails if there are any questions....
 
-FOR LINUX USERS:
+# FOR LINUX USERS:
+------------------
 - When I wrote this game I was not a big fan of linux, and I've planned to release this by maybe selling it if it is finally completed so this is in C# and XNA4...... Also XNA was a nice thing for me as before this game I've only did 3D programming in assembly (Masm32) and opengl immediate mode, but this game introduced me to shaders and some then-modern stuff. The content pipeline helped much to create big data structures for collision octrees of starships and model loading and etc. etc. while I was able to create a scene management and other things easily concentrating on real work. Also there were pre-existing classes for every matrix and vector/quaternion transformation and that helps as I was in a really hurry while writing this code...
 - Anyways I'm now became a really linux-guy, who like suckess.org, dwm, FOSS and integrates vim plugins into every editor so I had tought about booting this game repository up as a monogame project but I'm really confused about monogame state of the art... I kind of fear that it still misses too many content pipeline stuff that I would need and also I have little time to work on this game as a hobbie so do not expect me to make this change soon. IF YOU CAN MANAGE TO START THIS UP IN MONOGAME, I WILL CHANGE TO THAT!!! I mean it!!! It would be huge to have a game like this on linux, while practically running on every machine and I might work on it more I think ;-)

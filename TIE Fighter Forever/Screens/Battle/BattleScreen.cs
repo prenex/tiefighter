@@ -156,7 +156,9 @@ namespace TIE_Fighter_Forever.Screens.Battle
                 sX = (float)(rand.NextDouble() - 0.5) * 2000;
                 sY = (float)(rand.NextDouble() - 0.5) * 2000;
                 sZ = (float)(rand.NextDouble() - 0.5) * 2000;
-                spawner.spawnSmallShip(new TieIn(game, new Vector3(sX, sY, sZ), Quaternion.CreateFromYawPitchRoll(0, (float)Math.PI / 2.0f, 0)), playerShip);
+                int fireMode = rand.Next(TieIn.FIRE_STATE_COUNT);
+                FireState fs = TieIn.possibleFireModes.ElementAt(fireMode);
+                spawner.spawnSmallShip(new TieIn(game, new Vector3(sX, sY, sZ), Quaternion.CreateFromYawPitchRoll(0, (float)Math.PI / 2.0f, 0), fs), playerShip);
             }
 
             List<BoundingBox> bbs = new List<BoundingBox>();
@@ -217,7 +219,9 @@ namespace TIE_Fighter_Forever.Screens.Battle
                         sX = (float)(rand.NextDouble() - 0.5) * 2000;
                         sY = (float)(rand.NextDouble() - 0.5) * 2000;
                         sZ = (float)(rand.NextDouble() - 0.5) * 2000;
-                        spawner.spawnSmallShip(new TieIn(game, new Vector3(sX, sY, sZ), Quaternion.CreateFromYawPitchRoll(0, (float)Math.PI / 2.0f, 0)), playerShip);
+                        int fireMode = rand.Next(TieIn.FIRE_STATE_COUNT);
+                        FireState fs = TieIn.possibleFireModes.ElementAt(fireMode);
+                        spawner.spawnSmallShip(new TieIn(game, new Vector3(sX, sY, sZ), Quaternion.CreateFromYawPitchRoll(0, (float)Math.PI / 2.0f, 0), fs), playerShip);
                     }
                 }
 
@@ -254,15 +258,17 @@ namespace TIE_Fighter_Forever.Screens.Battle
                 }
                 rotationX = mouseLikeMan.getNormalizedY();
                 speed = playerShip.maxSpeed * -mouseLikeMan.getNormalizedZ();
-                //speed = 1.25f;
+
+                // Enter changes the firing scheme
+                if (keyLikeMan.enterMenuItemPressed())
+                {
+                    playerShip.shuffleFireState();
+                }
 
                 if (mouseLikeMan.leftButton())
                 {
-                    if (gt.TotalGameTime.TotalMilliseconds > lastFired + 1000)
-                    {
-                        spawner.spawnQuadLaser(playerShip);
-                        lastFired = gt.TotalGameTime.TotalMilliseconds;
-                    }
+                    double currentTime = gt.TotalGameTime.TotalMilliseconds;
+                    lastFired = spawner.spawnLaserForFireStateOf(playerShip, currentTime, lastFired);
                 }
             }
         }

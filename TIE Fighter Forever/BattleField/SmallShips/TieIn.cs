@@ -8,8 +8,12 @@ using TIE_Fighter_Forever.BattleField.OtherObjects;
 
 namespace TIE_Fighter_Forever.BattleField.SmallShips
 {
-    class TieIn : SmallShip
+    class TieIn : SmallShip, LaserFirePointHolder
     {
+        public static readonly int FIRE_STATE_COUNT = 3;
+
+        public static readonly FireState[] possibleFireModes = new FireState[3] { FireState.SINGLE, FireState.IMPERIAL_DOUBLE, FireState.QUAD };
+
         Model[] models;
         /// <summary>
         /// Létrehoz egy TIE Interceptort
@@ -17,8 +21,11 @@ namespace TIE_Fighter_Forever.BattleField.SmallShips
         /// <param name="game"></param>
         /// <param name="postition"></param>
         /// <param name="rotation"></param>
-        public TieIn(TIEGame game, Vector3 position, Quaternion rotation)
+        public TieIn(TIEGame game, Vector3 position, Quaternion rotation, FireState fireState)
         {
+            this.possibleFireStates = possibleFireModes;
+            this.fireState = fireState;
+
             // élet:
             this.life = 20; // 20 RU: TIE Interceptor
 

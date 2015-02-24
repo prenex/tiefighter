@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TIE_Fighter_Forever.BattleField;
 using Microsoft.Xna.Framework;
+using TIE_Fighter_Forever.BattleField.SmallShips;
 
 namespace TIE_Fighter_Forever.AI
 {
@@ -24,7 +25,7 @@ namespace TIE_Fighter_Forever.AI
             }
         }
 
-        public BruteforceStarFighterAI(float maxSpeed, CollidableSpaceObject governedObj, CollidableSpaceObject target, Strategist strategist)
+        public BruteforceStarFighterAI(float maxSpeed, SmallShip governedObj, CollidableSpaceObject target, Strategist strategist)
         {
             this.speed = maxSpeed;
             this.governedAIs = null;
@@ -143,11 +144,7 @@ namespace TIE_Fighter_Forever.AI
 
                     if (state == CollidableSpaceObjectAIState.AttackingTarget)
                     {
-                        if (gt.TotalGameTime.TotalMilliseconds > lastFired + 1000)
-                        {
-                            strategist.spawnerObj.spawnQuadLaser(governedObject);
-                            lastFired = gt.TotalGameTime.TotalMilliseconds;
-                        }
+                        lastFired = strategist.spawnerObj.spawnLaserForFireStateOf((SmallShip)governedObject, gt.TotalGameTime.TotalMilliseconds, lastFired);
                     }
                 }
             }
@@ -172,7 +169,7 @@ namespace TIE_Fighter_Forever.AI
         }
 
         /// <summary>
-        /// Beállítja az irányított objektumot
+        /// Sets the governed object - this case it can be only a SmallShip instance
         /// </summary>
         /// <param name="obj"></param>
         public override void setGovernedObject(CollidableSpaceObject obj)

@@ -26,7 +26,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <PublishUrl>publish\</PublishUrl>
+    <PublishUrl>E:\TIE\install\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -36,7 +36,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -70,10 +70,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>127EC0F2817BC410204F4F9B6D78C6B4689F477F</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>8D11ACE7F38B5DF8687D4E48EBED9B667AD9DE55</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>TIE Fighter Forever_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>TIE Fighter Forever_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -137,6 +137,9 @@
     <Compile Include="AI\CollidableSpaceObjectAIState.cs" />
     <Compile Include="AI\Strategist.cs" />
     <Compile Include="BattleField\BigShips\BigShip.cs" />
+    <Compile Include="BattleField\FireState.cs" />
+    <Compile Include="BattleField\LaserFirePointHolder.cs" />
+    <Compile Include="BattleField\LaserFirePointDescriptor.cs" />
     <Compile Include="BattleField\OtherObjects\Light.cs" />
     <Compile Include="BattleField\BigShips\Platform01.cs" />
     <Compile Include="BattleField\SmallShips\Laser.cs" />
@@ -240,6 +243,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="TIE Fighter Forever_1_TemporaryKey.pfx" />
     <None Include="TIE Fighter Forever_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup />

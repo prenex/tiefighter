@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace TIE_Fighter_Forever.BattleField.SmallShips
 {
-    public class PlayerShip : SmallShip
+    public class PlayerShip : SmallShip, LaserFirePointHolder
     {
         // Current default maximum heath,, TODO: make this changable!
         public const int maxHealth = 120;
@@ -24,6 +24,9 @@ namespace TIE_Fighter_Forever.BattleField.SmallShips
         /// <param name="radius">Játékos hajójának mérete</param>
         public PlayerShip(Vector3 position, float rotationX, float rotationY, float rotationZ, float radius)
         {
+            this.possibleFireStates = new FireState[3] { FireState.SINGLE, FireState.IMPERIAL_DOUBLE, FireState.QUAD };
+            this.firePoints.laserColor = new Vector3(10, 7, 0);
+
             this.life = maxHealth;    // 100+20 RU: Tie Advanced
             this.vPosition = position;
             this.oldPosition = position - new Vector3(0,0,0.1f);

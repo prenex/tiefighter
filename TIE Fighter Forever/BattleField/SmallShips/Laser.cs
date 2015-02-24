@@ -10,18 +10,23 @@ namespace TIE_Fighter_Forever.BattleField.SmallShips
 {
     class Laser : SmallShip
     {
-        Model model;
-        Vector3 em;
+        private readonly int damageCausedOnCollision;
+        private Model model;
+        private Vector3 em;
         public float speed;
+
         /// <summary>
-        /// Létrehoz egy TIE Interceptort
+        /// Creates a Laser
         /// </summary>
-        /// <param name="game"></param>
-        /// <param name="postition"></param>
-        /// <param name="rotation"></param>
-        public Laser(TIEGame game, Vector3 position, Quaternion rotation, Vector3 emissiveColor, float speed)
+        /// <param name="game">The main game object</param>
+        /// <param name="postition">The position of the laser</param>
+        /// <param name="rotation">The orientation of the laser</param>
+        /// <param name="damageCausedOnCollision">How many damage will be caused on impact</param>
+        public Laser(TIEGame game, Vector3 position, Quaternion rotation, Vector3 emissiveColor, float speed, int damageCausedOnCollision)
         {
-            // Életpont pozítívra hozása(nem használjuk)
+            this.damageCausedOnCollision = damageCausedOnCollision;
+
+            // A positive life (mostly unused)
             this.life = 1;
 
             // Paraméterek mentése
@@ -127,7 +132,7 @@ namespace TIE_Fighter_Forever.BattleField.SmallShips
 
         public override int damageCausedIfCollide()
         {
-            return 5;
+            return this.damageCausedOnCollision;
         }
     }
 }

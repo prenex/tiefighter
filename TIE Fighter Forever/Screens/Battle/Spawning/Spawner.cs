@@ -32,21 +32,94 @@ namespace TIE_Fighter_Forever.Screens.Battle.Spawning
             battleField.addSmallShip(ship);
         }
 
-        public void spawnQuadLaser(CollidableSpaceObject firingObject)
+        private void spawnLaser(Vector3 vPos, Quaternion qRot, SmallShip firingObject, int laserIndex)
+        {
+            laserIndex = laserIndex % firingObject.getLaserFirePointsDescriptor().firePointCount;
+            vPos = vPos + (firingObject.getUpVector() * firingObject.getLaserFirePointsDescriptor().upDisplacements[laserIndex])
+                + (firingObject.getRightVector() * firingObject.getLaserFirePointsDescriptor().rightDisplacements[laserIndex])
+                + (firingObject.getForwardVector() * firingObject.getLaserFirePointsDescriptor().forwardDisplacements[laserIndex]);
+            battleField.addLaser(new Laser(game, vPos, qRot, firingObject.getLaserFirePointsDescriptor().laserColor,
+                firingObject.getRay().Direction.Length() + 3.0f,
+                firingObject.getLaserFirePointsDescriptor().damageCausedOnCollision));
+        }
+
+        /// <summary>
+        /// Try to spawn lasers according to the firestate of the given object in the current timeStamp, knowing when last fire happened. If the object can fire, the returned double gets the new lastFired, otherwise "lastFired" is returned!
+        /// </summary>
+        /// <param name="firingObject">The object that fire</param>
+        /// <param name="currentTime">The current milliseconds</param>
+        /// <param name="lastFired">The milliseconds when last fire happened</param>
+        /// <returns>lastFired or currentmilliseconds depending on fire availability - if fire happens, currentTime is returned!</returns>
+        public double spawnLaserForFireStateOf(SmallShip firingObject, double currentTime, double lastFired)
+        {
+            switch (firingObject.getFireState())
+            {
+                case FireState.SINGLE:
+                    if (currentTime > lastFired + firingObject.getLaserFirePointsDescriptor().waitForSingleFireMs)
+                    {
+                        spawnLaser(firingObject);
+                        return currentTime;
+                    }
+                    break;
+                case FireState.IMPERIAL_DOUBLE:
+                    if (currentTime > lastFired + firingObject.getLaserFirePointsDescriptor().waitForSingleFireMs * 2)
+                    {
+                        spawnEmpireTwinLaser(firingObject);
+                        return currentTime;
+                    }
+                    break;
+                case FireState.QUAD:
+                    if (currentTime > lastFired + firingObject.getLaserFirePointsDescriptor().waitForSingleFireMs * 4)
+                    {
+                        spawnQuadLaser(firingObject);
+                        return currentTime;
+                    }
+                    break;
+            }
+            return lastFired;
+        }
+
+        public void spawnLaser(SmallShip firingObject)
+        {
+            spawnLaser(firingObject.position, firingObject.rotation, firingObject, firingObject.getAndChangeCurrentFirePointWith(1));
+        }
+
+        public void spawnQuadLaser(SmallShip firingObject)
         {
             Quaternion qRot = firingObject.rotation;
-            Vector3 vPos = firingObject.position;
-            vPos = vPos + (firingObject.getUpVector() * -1.25f) + (firingObject.getRightVector() * -2.0f) + (firingObject.getForwardVector() * 17.0f);
-            battleField.addLaser(new Laser(game, vPos, qRot, new Vector3(5, 10, 5), firingObject.getRay().Direction.Length() + 3.0f));
-            vPos = firingObject.position;
-            vPos = vPos + (firingObject.getUpVector() * 1.25f) + (firingObject.getRightVector() * -2.0f) + (firingObject.getForwardVector() * 17.0f);
-            battleField.addLaser(new Laser(game, vPos, qRot, new Vector3(5, 10, 5), firingObject.getRay().Direction.Length() + 3.0f));
-            vPos = firingObject.position;
-            vPos = vPos + (firingObject.getUpVector() * 1.25f) + (firingObject.getRightVector() * 2.0f) + (firingObject.getForwardVector() * 17.0f);
-            battleField.addLaser(new Laser(game, vPos, qRot, new Vector3(5, 10, 5), firingObject.getRay().Direction.Length() + 3.0f));
-            vPos = firingObject.position;
-            vPos = vPos + (firingObject.getUpVector() * -1.25f) + (firingObject.getRightVector() * 2.0f) + (firingObject.getForwardVector() * 17.0f);
-            battleField.addLaser(new Laser(game, vPos, qRot, new Vector3(5, 10, 5), firingObject.getRay().Direction.Length() + 3.0f));
+
+            spawnLaser(firingObject.position, qRot, firingObject, 0);
+            spawnLaser(firingObject.position, qRot, firingObject, 1);
+            spawnLaser(firingObject.position, qRot, firingObject, 2);
+            spawnLaser(firingObject.position, qRot, firingObject, 3);
+
+
+            // update current firepoint
+            firingObject.getAndChangeCurrentFirePointWith(4);
+        }
+
+        /// <summary>
+        /// Spaws a twin laser shot that is fired in imperial fashion: top-bottom-top-bottom
+        /// </summary>
+        /// <param name="firingObject">The object that fires</param>
+        public void spawnEmpireTwinLaser(SmallShip firingObject)
+        {
+            Quaternion qRot = firingObject.rotation;
+
+            // Update current firepoint and decide about created shot
+            int fireSelector = (firingObject.getAndChangeCurrentFirePointWith(2) & 2);
+            if (fireSelector == 0)
+            {
+                // Bottom lasers
+                spawnLaser(firingObject.position, qRot, firingObject, 0);
+                spawnLaser(firingObject.position, qRot, firingObject, 3);
+            }
+            else
+            {
+                // Top lasers
+                spawnLaser(firingObject.position, qRot, firingObject, 1);
+                spawnLaser(firingObject.position, qRot, firingObject, 2);
+            }
         }
     }
 }
